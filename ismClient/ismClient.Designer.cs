@@ -1,6 +1,6 @@
 ﻿namespace ismClient
 {
-    partial class Form1
+    partial class ismClient
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -72,7 +72,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(293, 23);
             this.progressBar1.TabIndex = 3;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // Form1
             // 
@@ -84,7 +83,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ismClient";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

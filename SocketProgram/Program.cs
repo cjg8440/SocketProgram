@@ -17,7 +17,8 @@ namespace ismServer
             IPEndPoint point = new IPEndPoint(IPAddress.Any, 8192);
             mySocket.Bind(point);
             mySocket.Listen(1);
-            System.Console.WriteLine("서버시작");
+            System.Console.WriteLine(DateTime.Now.ToString() + " - Server Start!");
+
 
             while (true)
             {

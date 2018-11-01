@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace ismClient
 {
-    public partial class Form1 : Form
+    public partial class ismClient : Form
     {
 
         private String file_path = null;
 
-        public Form1()
+        public ismClient()
         {
             InitializeComponent();
         }
@@ -46,9 +46,5 @@ namespace ismClient
 
         }
 
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

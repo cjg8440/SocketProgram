@@ -10,10 +10,15 @@ namespace ismServer
 {
     class SocketReceive
     {
-        public void file_Receive(Socket accept)
-        {
-            Socket mySocket = accept;
+        private Socket mySocket;
 
+        public void setMySocket(Socket mySocket)
+        {
+            this.mySocket = mySocket;
+        }
+
+        public void file_Receive()
+        {
             //파일이름
             byte[] buffer = new Byte[4];
             mySocket.Receive(buffer);
@@ -42,7 +47,7 @@ namespace ismServer
                 totalLength += receiveLength;
             }
 
-            System.Console.WriteLine(DateTime.Now.ToString() + " - " + fileName + "received.");
+            System.Console.WriteLine(DateTime.Now.ToString() + " - " + fileName + "전송 완료.");
 
             mySocket.Close();
             writer.Close();

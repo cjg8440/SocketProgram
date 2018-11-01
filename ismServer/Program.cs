@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ismClient
+namespace ismServer
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace ismClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ismClient());
+            Application.Run(new ismServer());
         }
     }
 }
