@@ -12,9 +12,7 @@ namespace ismServer
     class ServerStart
     {
         private Socket mySocket;
-        private int a;
-        private int b;
-
+        
         public Socket getmySocket()
         {
             return this.mySocket;

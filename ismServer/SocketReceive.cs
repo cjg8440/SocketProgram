@@ -37,7 +37,7 @@ namespace ismServer
             buffer = new Byte[1024];
             int totalLength = 0;
 
-            FileStream fileStr = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+            FileStream fileStr = new FileStream(Directory.GetCurrentDirectory().ToString() + "\\prt\\" + fileName, FileMode.Create, FileAccess.Write);
             BinaryWriter writer = new BinaryWriter(fileStr);
 
             while (totalLength < fileLength)

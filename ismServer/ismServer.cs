@@ -46,5 +46,12 @@ namespace ismServer
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MakeResult result = new MakeResult();
+
+            result.Analize();
+        }
     }
 }
