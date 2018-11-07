@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Drawing;
+using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -42,11 +43,15 @@ namespace ismServer
                     }
                 }
 
-                Analize_Result();
+                ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
+                ws.Activate();
+
+
 
                 wb.SaveAs(@"D:\개발연습\C#\SocketProgram\ismServer\bin\Debug\_test.xlsx", Excel.XlFileFormat.xlWorkbookDefault);
                 wb.Close(true);
                 excelApp.Quit();
+
             }catch(Exception E)
             {
                 System.Console.WriteLine(E.ToString());
@@ -59,31 +64,6 @@ namespace ismServer
 
             }
 
-            /* 이호[사원] 님의 말 (오후 12:23) :  
-            public delegate void logWrite(string txt);
-            public static event logWrite;
-
-            로그 쓸 부분에 이렇게 선언하고
-            쓸때는 logWrite(text);
-            이렇게
-            그리고 폼에서 이벤트 추가
-            이호[사원] 님의 말 (오후 12:24) :  
-            아 다시
-            이호[사원] 님의 말 (오후 12:26) :  
-            선언
-            public delegate void logWrite(string txt);
-            public static event logWrite logW;
-
-            사용 
-            logW(text);
-
-            이벤트
-            클래스명.logW += new 클래스명.logWrite(메소드명);
-            이호[사원] 님의 말 (오후 12:27) :  
-            private void 메소드명(string txt){
-            textbox.appendText(txt);
-
-            }*/
         }
 
         private void Analize_UNIX()
@@ -101,10 +81,22 @@ namespace ismServer
             FileStream open_File = new FileStream(s, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(open_File, Encoding.Default);
 
+            ws.Activate();
+
             int count = 0;
+
+            if (win_host != 0)
+            {
+                ((Excel.Range)ws.Columns[6 + win_host]).Insert();
+                ws.get_Range(ws.Cells[87, 5 + win_host], ws.Cells[88, 5 + win_host]).Copy();
+                ((Excel.Range)ws.Cells[87, 6 + win_host]).Select();
+                ws.Paste();
+            }
 
             ws.Cells[3, 6 + win_host] = win_host + 1;
             ws.Cells[4, 6 + win_host] = s.Split('_')[2];
+
+            System.Console.WriteLine(s);
 
             while (!reader.EndOfStream)
             {
@@ -116,7 +108,7 @@ namespace ismServer
                         ws.Cells[9 + count, 6 + win_host] = "양호";
                     else
                     {
-                        ws.Cells[9 + count, 6 + win_host] = "조치예외";
+                        ws.Cells[9 + count, 6 + win_host] = "예외합의";
                     }
                     
                     count++;
@@ -129,23 +121,8 @@ namespace ismServer
             }
 
             win_host++;
-        }
 
-        private void Analize_Result()
-        {
-            System.Console.WriteLine("Analize_Result() 시작");
-
-            ws.Cells[8, 6 + win_host] = "양호";
-            ws.Cells[8, 7 + win_host] = "예외합의";
-            ws.Cells[8, 8 + win_host] = "예외요청";
-            ws.Cells[8, 9 + win_host] = "합계";
-
-            for(int inx = 0; inx < 78; inx++)
-            {
-                System.Console.WriteLine(inx);
-
-                ws.Cells[9 + inx, 6 + win_host]= "=COUNTIF('양호')";
-            }
+            ((Excel.Range)ws.Cells[9,6]).Select();
         }
 
         private void ReleaseExcelObject(object obj)
